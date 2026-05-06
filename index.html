@@ -1,0 +1,371 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<title>TUBLIX</title>  <link rel="icon" href="logo.ico">  <style>  
+html, body {  
+    margin: 0;  
+    padding: 0;  
+    height: 100%;  
+    overflow: hidden;  
+    font-family: Arial;  
+    cursor: url("cursors/normalselect.cur"), auto;  
+}  
+  
+/* BACKGROUND */  
+body {  
+    background-image: url("wallpapers/wallpaper1.png");  
+    background-size: cover;  
+    background-repeat: repeat-x;  
+    animation: moveBg 120s linear infinite;  
+}  
+  
+@keyframes moveBg {  
+    from { background-position: 0 0; }  
+    to { background-position: 6000px 0; }  
+}  
+  
+/* ORANGE FILTER */  
+body::before {  
+    content: "";  
+    position: fixed;  
+    width: 100%;  
+    height: 100%;  
+    background: rgba(255,120,0,0.4);  
+    mix-blend-mode: multiply;  
+    pointer-events: none;  
+}  
+  
+/* TOP BAR */  
+.topbar {  
+    position: fixed;  
+    top: 0;  
+    width: 100%;  
+    height: 60px;  
+    display: flex;  
+    align-items: center;  
+    padding: 0 10px;  
+    background: linear-gradient(to bottom, #ffb347, #ff8c00, #e67600);  
+}  
+  
+.topbar img {  
+    height: 40px;  
+}  
+  
+/* MUSIC */  
+.top-controls {  
+    position: fixed;  
+    top: 10px;  
+    right: 10px;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: flex-end;  
+    gap: 6px;  
+}  
+  
+.btn {  
+    background: linear-gradient(to bottom, #ffb347, #ff8c00);  
+    border: 1px solid #7a3f00;  
+    padding: 5px 8px;  
+    font-size: 12px;  
+    cursor: pointer;  
+}  
+  
+.song-title {  
+    font-size: 12px;  
+    color: #fff;  
+    background: rgba(0,0,0,0.3);  
+    padding: 4px 6px;  
+}  
+  
+/* CENTER BOX (NOT FULLSCREEN ANYMORE) */  
+.game-box {  
+    position: absolute;  
+    top: 85px;  
+    left: 50%;  
+    transform: translateX(-50%);  
+  
+    width: min(900px, 92vw);  
+    height: min(650px, 78vh);  
+  
+    background: linear-gradient(to bottom, #ffb347, #ff7a00);  
+    border-radius: 24px;  
+    border: 2px solid rgba(0,0,0,0.4);  
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);  
+  
+    padding: 14px;  
+    z-index: 5;  
+}  
+  
+/* dark background overlay */  
+.overlay {  
+    position: fixed;  
+    top: 0;  
+    left: 0;  
+    width: 100%;  
+    height: 100%;  
+    background: rgba(0,0,0,0.4);  
+    display: none;  
+    z-index: 20;  
+}  
+  
+/* big second orange panel */  
+.detail-panel {  
+    position: fixed;  
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%);  
+  
+    width: 900px;  
+    height: 500px;  
+  
+    background: linear-gradient(to bottom, #ffb347, #ff7a00);  
+    border-radius: 20px;  
+    border: 2px solid rgba(0,0,0,0.4);  
+  
+    display: flex;  
+    z-index: 30;  
+  
+    display: none;  
+}  
+  
+/* LEFT SIDE */  
+.left {  
+    width: 45%;  
+    padding: 15px;  
+    color: white;  
+    text-shadow: 1px 1px 2px black;  
+}  
+  
+.big-thumb {  
+    width: 100%;  
+    height: auto;  
+    max-height: 260px;
+    object-fit: cover;  
+    border-radius: 10px;  
+    border: 1px solid black;  
+}
+  
+.title {  
+    font-size: 20px;  
+    font-weight: bold;  
+    margin-top: 10px;  
+}  
+  
+.creator {  
+    font-size: 13px;  
+}  
+  
+.stats {  
+    margin-top: 10px;  
+    font-size: 14px;  
+}  
+  
+.stats img {  
+    width: 16px;  
+    height: 16px;  
+}  
+  
+/* DIVIDER LINE */  
+.divider {  
+    width: 2px;  
+    background: white;  
+    opacity: 0.4;  
+}  
+  
+/* RIGHT SIDE */  
+.right {  
+    width: 55%;  
+    padding: 15px;  
+    color: white;  
+    text-shadow: 1px 1px 2px black;  
+  
+    display: flex;  
+    flex-direction: column;  
+}  
+  
+.desc-title {  
+    font-size: 18px;  
+    font-weight: bold;  
+    margin-bottom: 10px;  
+}  
+  
+.desc {  
+    font-size: 14px;  
+    margin-bottom: 20px;  
+}  
+  
+/* PLAY BUTTON */  
+.play-btn {  
+    width: 160px;  
+    height: auto;  
+    max-width: 100%;
+    object-fit: contain;
+    cursor: pointer;  
+    margin-top: auto;  
+    align-self: flex-end;  
+}
+  
+/* BIG TOP THUMBNAIL */  
+.thumb {  
+    width: 120px;  
+    height: 120px;  
+    object-fit: cover;  
+    border-radius: 8px;  
+    border: 1px solid black;  
+    display: block;  
+}  
+  
+/* GAME INFO BELOW */  
+.game-info {  
+    margin-top: 10px;  
+    color: white;  
+    text-shadow: 1px 1px 2px black;  
+}  
+  
+.game-title {  
+    font-size: 18px;  
+    font-weight: bold;  
+}  
+  
+.game-author {  
+    font-size: 13px;  
+    margin-bottom: 8px;  
+}  
+  
+.stats {  
+    display: flex;  
+    gap: 15px;  
+    font-size: 14px;  
+}  
+  
+.stat {  
+    display: flex;  
+    align-items: center;  
+    gap: 5px;  
+}  
+  
+.stat img {  
+    width: 16px;  
+    height: 16px;  
+}  
+</style>  </head>  <body>  <!-- TOP BAR -->  <div class="topbar">  
+    <img src="title_logo.png">  
+</div>  <!-- MUSIC -->  <div class="top-controls">  
+    <div class="song-title" id="songTitle">Song: -</div>  
+    <div>  
+        <button class="btn" onclick="prevSong()">⏮</button>  
+        <button class="btn" onclick="togglePlay()">▶</button>  
+        <button class="btn" onclick="nextSong()">⏭</button>  
+    </div>  
+</div>  
+<!-- GAME BOX -->  
+<div class="game-box">  
+    <img src="icons/default_game_thumbnail.png" class="thumb" onclick="openGamePanel()">  
+
+    <div class="game-info">  
+        <div class="game-title">The Begginings</div>  
+        <div class="game-author">by mateo</div>  
+
+        <div class="stats">  
+    <div class="stat">  
+        Playing: 0  
+    </div>  
+
+    <div class="stat">  
+        Visits: 0  
+    </div>  
+</div>
+    </div>  
+</div>  
+
+<!-- POPUP PANEL (MOVE THIS OUTSIDE THE GAME-BOX) -->  
+<div class="overlay" id="overlay" onclick="closeGamePanel()"></div>  
+
+<div class="detail-panel" id="detailPanel">  
+    <!-- LEFT SIDE -->  
+    <div class="left">  
+        <img src="icons/default_game_thumbnail.png" class="big-thumb">  
+
+        <div class="info">  
+            <div class="title">The Begginings</div>  
+            <div class="creator">by mateo</div>  
+
+            <div class="stats">  
+    <div>Playing: 0</div>  
+    <div>Visits: 0</div>  
+</div>
+        </div>  
+    </div>  
+
+    <!-- DIVIDER -->  
+    <div class="divider"></div>  
+
+    <!-- RIGHT SIDE -->  
+    <div class="right">  
+        <div class="desc-title">Description</div>  
+        <div class="desc">  
+            First game on TUBLIX. Not unstable.  
+        </div>  
+        <img src="icons/play_button.png" class="play-btn">  
+    </div>  
+</div>
+<!-- AUDIO -->  <audio id="music"></audio>
+
+<script>  
+const songs = [  
+    "menu_songs/song1.mp3",  
+    "menu_songs/song2.mp3",  
+    "menu_songs/song3.mp3"  
+];  
+  
+let index = 0;  
+let playing = false;  
+  
+const audio = document.getElementById("music");  
+const title = document.getElementById("songTitle");  
+  
+function loadSong() {  
+    audio.src = songs[index];  
+    title.innerText = "Song: " + songs[index].split("/").pop();  
+}  
+  
+function togglePlay() {  
+    if (playing) {  
+        audio.pause();  
+        playing = false;  
+    } else {  
+        audio.play();  
+        playing = true;  
+    }  
+}  
+  
+function nextSong() {  
+    index = (index + 1) % songs.length;  
+    loadSong();  
+    audio.play();  
+    playing = true;  
+}  
+  
+function prevSong() {  
+    index = (index - 1 + songs.length) % songs.length;  
+    loadSong();  
+    audio.play();  
+    playing = true;  
+}  
+  
+audio.onended = nextSong;  
+  
+loadSong();  
+  
+function openGamePanel() {  
+    document.getElementById("overlay").style.display = "block";  
+    document.getElementById("detailPanel").style.display = "flex";  
+}  
+  
+function closeGamePanel() {  
+    document.getElementById("overlay").style.display = "none";  
+    document.getElementById("detailPanel").style.display = "none";  
+}  
+  
+</script>  </body>  
+</html>  
